@@ -118,7 +118,7 @@ struct GameState
         // If the player has barred pieces but didn't try to move them 
         if (currentMove.from != -1 && (currentPlayer == Player::WHITE ? whiteBar : blackBar))
         {
-            Message = " has at least one barred checker";
+            Message = " has at least one barred piece";
             return false;
         }
 
@@ -132,7 +132,7 @@ struct GameState
         // If the player is trying to bear off but can't
         if (currentMove.to == 24 && !canBearOff())
         {
-            Message = " cannot bear off"; //problem with this function 
+            Message = " cannot bear off"; 
             return false;
         }
 
@@ -222,21 +222,21 @@ struct GameState
         {
             currentPlayer == Player::WHITE ? whiteBar-- : blackBar--;
             currentPlayer == Player::WHITE ? board[currentMove.to]-- : board[currentMove.to]++;
-            Message = " player moved from bar to point: " + std::to_string(currentMove.to+1);
+            Message = " moved from bar to point: " + std::to_string(currentMove.to+1);
         }
         // If the player is bearing off 
         else if (currentMove.to == 24)
         {
             currentPlayer == Player::WHITE ? whiteGoal++ : blackGoal++;
             currentPlayer == Player::WHITE ? board[currentMove.from]++ : board[currentMove.from]--;
-            Message = " player beared off from point: " + std::to_string(currentMove.from+1);
+            Message = " beared off from point: " + std::to_string(currentMove.from+1);
         }
         // Otherwise it is a normal move 
         else
         {
             currentPlayer == Player::WHITE ? board[currentMove.from]++ : board[currentMove.from]--;
             currentPlayer == Player::WHITE ? board[currentMove.to]-- : board[currentMove.to]++;
-            Message = " player moved from point: " + std::to_string(currentMove.from+1) + " to point: " + std::to_string(currentMove.to+1);
+            Message = " moved from point: " + std::to_string(currentMove.from+1) + " to point: " + std::to_string(currentMove.to+1);
         }
 
         return true;
@@ -286,7 +286,7 @@ struct GameState
                     dice.diceNums.clear();
                     return;
                 }
-                else if (board[dice.diceNums[0] - 1] <= -2)
+                else if (board[dice.diceNums[1] - 1] <= -2)
                 {
                     Message += "\n~ has no valid moves, voiding turn, diceOne: " + std::to_string(dice.diceNums[0]) + " diceTwo: " + std::to_string(dice.diceNums[1]);
                     dice.diceNums.clear();
